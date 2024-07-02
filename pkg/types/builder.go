@@ -405,7 +405,7 @@ func (r *resource) addParameterField(f *Field, field *types.Var) {
 	f.Comment.Required = ptr.To(requiredBySchema && !f.isInit())
 
 	// For removing omitempty tag from json tag, we are just checking if the field is required by the schema.
-	if requiredBySchema {
+	if requiredBySchema || f.Schema.Required == true {
 		// Required fields should not have omitempty tag in json tag.
 		// TODO(muvaf): This overrides user intent if they provided custom
 		// JSON tag.
